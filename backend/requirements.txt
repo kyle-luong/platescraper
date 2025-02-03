@@ -1,0 +1,13 @@
+# Core dependencies
+Django==5.1.5
+djangorestframework==3.15.2
+
+# External API request handling
+requests==2.32.3
+
+# Task automation
+celery==5.4.0
+redis==5.2.1
+
+# Database support
+# TODO: integrate with PostgreSQL
