@@ -2,7 +2,7 @@
 ### Menu to iOS app and widget
 A Django-based API that fetches menu data and provides structured endpoints for integration with an iOS app and widget.
 
---
+---
 
 ### Clone the repository:
 ```sh
