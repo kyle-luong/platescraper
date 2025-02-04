@@ -52,14 +52,14 @@ def sync_menu_data():
         return
 
     # Get available meal periods from API response
-    available_menu_periods = get_active_menu_periods(menu_data)
-    if not available_menu_periods:
+    menu_periods = get_active_menu_periods(menu_data)
+    if not menu_periods:
         print(f"No menu periods available for {db_date}")
         return
 
     menu = get_or_create_menu(db_date)
 
-    for period_name, period_id in available_menu_periods.items():
+    for period_name, period_id in menu_periods.items():
         print(f"Processing {period_name} (ID: {period_id})...")
 
         menu_products = menu_data.get("Menu", {}).get("MenuProducts", [])
