@@ -6,27 +6,30 @@ from datetime import date
 
 @api_view(["GET"])
 def get_menu(request, menu_date=None, menu_period=None):
-    # Default to today's menu
     if not menu_date:
         menu_date = date.today()
 
     menu = get_object_or_404(Menu, date=menu_date)
 
-    if menu_period:
-        menu_period = get_object_or_404(MenuPeriod, menu=menu, period_name=menu_period)
-        food_items = FoodItem.objects.filter(menu_period=menu_period).values_list("name", flat=True)
-        return Response({
-            "date": str(menu_date),
-            "period": menu_period.period_name,
-            "items": list(food_items)
-        })
-    
-    menu_data = {}
-    for menu_period in menu.menu_periods.all():
-        food_items = FoodItem.objects.filter(menu_period=menu_period).values_list("name", flat=True)
-        menu_data[menu_period.period_name] = list(food_items)
+    stations_data = {}
+
+    for food_item in FoodItem.objects.filter(menu_period__menu=menu):
+        station = food_item.station
+        period_name = food_item.menu_period.period_name
+
+        if station.station_id not in stations_data:
+            stations_data[station.station_id] = {
+                "station_id": station.station_id,
+                "station_name": station.station_name,
+                "meals": {}
+            }
+
+        if period_name not in stations_data[station.station_id]["meals"]:
+            stations_data[station.station_id]["meals"][period_name] = []
+
+        stations_data[station.station_id]["meals"][period_name].append(food_item.name)
 
     return Response({
         "date": str(menu.date),
-        "menu": menu_data
+        "stations": list(stations_data.values())
     })
