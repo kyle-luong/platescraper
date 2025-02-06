@@ -2,13 +2,13 @@ import requests
 from datetime import datetime
 from menu.models import Menu, Station, MenuPeriod, FoodItem
 
-PERIOD_MAPPING = {
-    "1421": "Breakfast",
-    "1422": "Brunch",
-    "1423": "Lunch",
-    "1424": "Dinner",
-    "2181": "All Day",
-}
+# PERIOD_MAPPING = {
+#     "1421": "Breakfast",
+#     "1422": "Brunch",
+#     "1423": "Lunch",
+#     "1424": "Dinner",
+#     "2181": "All Day",
+# }
 
 def fetch_menu_from_api(api_date, period_id):
     url = f"https://virginia.campusdish.com/api/menu/GetMenus?locationId=695&mode=Daily&date={api_date}&periodId={period_id}"
@@ -48,7 +48,13 @@ def sync_menu_data():
 
     menu = get_or_create_menu(db_date)
 
-    for period_id, period_name in PERIOD_MAPPING.items():
+    menu_data = fetch_menu_from_api(api_date, "")
+    menu_periods = menu_data.get("Menu", {}).get("MenuPeriods", [])
+    period_mapping = {}
+    for menu_period in menu_periods:
+        period_mapping[menu_period.get("PeriodId")] = menu_period.get("Name")
+
+    for period_id, period_name in period_mapping.items():
         menu_data = fetch_menu_from_api(api_date, period_id)
         if not menu_data: continue
 
