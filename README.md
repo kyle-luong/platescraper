@@ -29,12 +29,14 @@ pip install -r requirements.txt
 
 ### Set Up Django Database
 ```
-python manage.py makemigrations
+cd backend
+python manage.py makemigrations menu
 python manage.py migrate
 ```
 
 ### Run the server
 ```
+cd backend
 python manage.py runserver
 ```
 ---
@@ -48,6 +50,7 @@ GET	| /api/menu/YYYY-MM-DD/meal-type/ | Get menu for a specific meal period
 ---
 ### Manually sync menu data
 ```
+cd backend
 python manage.py shell
 >>> from menu.sync_menu import sync_menu_data
 >>> sync_menu_data()
