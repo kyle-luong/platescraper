@@ -7,7 +7,6 @@ A Django-based API that fetches menu data and provides structured endpoints for 
 ### Clone the repository:
 ```sh
 git clone https://github.com/kyle-luong/platescraper.git
-cd menu-api
 ```
 
 ### Create and activate virtual environment
