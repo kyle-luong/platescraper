@@ -44,8 +44,6 @@ Method	| Endpoint	| Description
 --- | --- | ---
 GET	| /api/menu/ | Get today's menu
 GET	| /api/menu/YYYY-MM-DD/ | Get menu for a specific date
-GET	| /api/menu/YYYY-MM-DD/meal-type/ | Get menu for a specific meal period
-
 ---
 ### Manually sync menu data
 ```
