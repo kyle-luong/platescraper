@@ -52,6 +52,9 @@ python manage.py shell
 >>> from menu.sync_menu import sync_menu_data
 >>> sync_menu_data()
 ```
-- Planned Feature: Schedule daily automatic menu syncing.
+Planned Features: 
+- Schedule daily automatic menu syncing with Celery and Redis
+- Integrate JWT authentication for the API
+- Migrate to PostgresSQL
 
 ---
