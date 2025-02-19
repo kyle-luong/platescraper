@@ -45,6 +45,13 @@ Method	| Endpoint	| Description
 GET	| /api/menu/ | Get today's menu
 GET	| /api/menu/YYYY-MM-DD/ | Get menu for a specific date
 ---
+### Authentication Endpoints (JWT)
+Method	| Endpoint	| Description
+---     | --- | ---
+POST    | /api/token/ | Obtain JWT access & refresh tokens
+POST    | /api/token/refresh | Refresh expired access tokens
+POST    | /api/register/ | Create a new user account (tbd)
+---
 ### Manually sync menu data
 ```
 cd backend
@@ -54,7 +61,7 @@ python manage.py shell
 ```
 Planned Features: 
 - Schedule daily automatic menu syncing with Celery and Redis
-- Integrate JWT authentication for the API
 - Migrate to PostgresSQL
+- Swagger Documentation 
 
 ---
