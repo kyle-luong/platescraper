@@ -60,6 +60,7 @@ python manage.py shell
 >>> sync_menu_data()
 ```
 Planned Features: 
+- User account registration
 - Schedule daily automatic menu syncing with Celery and Redis
 - Migrate to PostgresSQL
 - Swagger Documentation 
