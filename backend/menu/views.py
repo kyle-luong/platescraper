@@ -3,8 +3,13 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Menu, MenuPeriod, FoodItem
 from datetime import date
+from django_ratelimit.decorators import ratelimit
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
 
 @api_view(["GET"])
+@permission_classes([IsAuthenticated])
+@ratelimit(key="ip", rate="10/m", block=True)  # Limit: 10 requests per minute per IP
 def get_menu(request, menu_date=None, menu_period=None):
     if not menu_date:
         menu_date = date.today()
